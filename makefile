@@ -1,6 +1,6 @@
 CXX = g++
-#CXXFLAGS = -g -Wall -W -Werror -ansi -pedantic
-CXXFLAGS = -g
+CXXFLAGS = -Wall -ansi
+#CXXFLAGS = -g
 
 OBJECTS =
 MAIN = rshell.cpp
@@ -11,7 +11,7 @@ TAR = rshell.tar
 TARLIST = rshell.cpp $(CPP) $(HEADERS) $(DICTLIST) $(EXE)
 
 all: $(HEADERS) $(MAIN)
-	$(CXX) $(CXXFLAGS) -o $(EXE) $(MAIN) $(HEADERS)
+	$(CXX) $(CXXFLAGS) -o $(EXE) $(MAIN) #$(HEADERS)
 
 compress:
 	tar -czvf $(TAR) $(TARLIST) $(EXE) makefile
