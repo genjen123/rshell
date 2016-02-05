@@ -5,6 +5,7 @@
 #include<stdlib.h>
 #include "shell.h"
 #include "parse.h"
+#define MAXLENGTH 100
 using namespace std;
 
 
