@@ -13,7 +13,7 @@ class Parse
 		//string before;		//temp variables
 		//string after;
 		//vector<string> split(string str_input, string pattern);	//vector of split strings
-    char line[MAXLENGTH];
+        char line[MAXLENGTH];
 
 	public:
 		Parse(){}; 	//constructor
@@ -64,8 +64,6 @@ class Parse
         }
     
     
-		//string ParseSemi(string);	//parses by semi colon and #
-		//string ParseCmd(string);	//parses by commands (&&, ||, etc.)
 };
 
 #endif
