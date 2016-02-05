@@ -13,6 +13,9 @@ int main()
 {
     
     Shell a;
+    Parse b;
     a.start();
+    b.readLine();
+    b.parseLine();
 	return 0;
 }
