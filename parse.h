@@ -3,16 +3,20 @@
 #include<iostream>
 #include<stdlib.h>
 #include<istream>
-#define MAXLENGTH 100
+#include<vector>
+#include<string>
+#define MAXLENGTH 256
 
 using namespace std;
 
 class Parse
 {
 	private:
-		//string before;		//temp variables
-		//string after;
-		//vector<string> split(string str_input, string pattern);	//vector of split strings
+		string before;		//temp variables
+        //vector<string>beforeV;//i make this because there might be new line
+		string after;
+        vector<string> split;
+        //(string str_input, string pattern);	//vector of split strings
         char line[MAXLENGTH];
 
 	public:
@@ -20,35 +24,42 @@ class Parse
         void readLine()
         {
 
+            getline(cin,before);
             
      
-            cin.getline(line,MAXLENGTH);
-                
+//            cin.getline(line,MAXLENGTH);
+//                
 //                
 //            for(int i = 0; i < sizeof(line); ++i)
 //            {
 //                cout << line[i];
 //            }
-//                
+            
+            
             return;
                 
                 
         }
     
-        char** parseLine()
+        void parseSim()
         {
-            //char pointer array
-            int specialSize, position = 0;
-            char* wonderful[MAXLENGTH];
-            char* token;
             
-            while(token != NULL)
-            {
-                wonderful[position] = token;
-                position++;
-                
-            }
-            cout << "this is for the parseLine" << endl;
+            //char pointer array
+            //string
+            //strtok function
+            
+//            int specialSize, position = 0;
+//            char wonderful[MAXLENGTH];
+//            char* wonderful[MAXLENGTH];
+//            char* token;
+//            
+//            while(token != NULL)
+//            {
+//                wonderful[position] = token;
+//                position++;
+//                
+//            }
+//            cout << "this is for the parseLine" << endl;
 //            for(int i = 0; i < 1; ++i)
 //            {
 //                for(int j = 0; j < 1; ++j)
@@ -57,7 +68,49 @@ class Parse
 //                    cout << wonderful[i][j];
 //                }
 //            }
-            return wonderful;
+//            return wonderful;
+            
+            //start a new one by using only string
+//            for(int i = 0; i < beforeV.size();++i)
+//            {
+//                for(int j = 0; j < beforeV.at(i).size(); ++j)
+//                {
+//                    cout << beforeV.at(i).at(j) << endl;
+//                }
+//            }
+            int point1 = 0;
+            int point2 = 0;
+            int counterV = 0;
+            for(int j = 0; j < before.size(); ++j)
+            {
+                //++point1;
+                if(before.at(j) == '#')
+                {
+                    point1 = j;
+                    cout << "hey dude, I am the j for # xoxo " << j << endl;
+                    cout << "hey dude, I am the point2 for # xoxo " << point2 << endl;
+                    cout << "I am the string that never work " << before.substr(point2,point1) << endl;
+                    split.push_back(before.substr(point2,point1));
+                    break;
+                        
+                }
+                if(before.at(j) == ';')
+                {
+                    point1 = j;
+                    cout << "j" << point1 << endl;
+                    split.push_back(before.substr(point2,point1));
+                    point2 = j + 1;
+                    cout << "size now" << before.size() << endl;
+                }
+                //cout << before.at(j) << endl;
+            }
+            cout << "size of the split " << split.size() <<  endl;
+
+            for(int i = 0; i < split.size();++i)
+            {
+                cout << split.at(i) << endl;
+            }
+
             
             
         
