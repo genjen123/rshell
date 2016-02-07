@@ -5,7 +5,6 @@
 #include<stdlib.h>
 #include "shell.h"
 #include "parse.h"
-#define MAXLENGTH 100
 using namespace std;
 
 
@@ -16,6 +15,6 @@ int main()
     Parse b;
     a.start();
     b.readLine();
-    b.parseLine();
+    b.parseSim();
 	return 0;
 }
