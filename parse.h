@@ -5,7 +5,7 @@
 #include<istream>
 #include<vector>
 #include<string>
-#define MAXLENGTH 256
+//#define MAXLENGTH 256
 
 using namespace std;
 
@@ -40,7 +40,7 @@ class Parse
                 
                 
         }
-    
+        //this function is for parsing the thing by ";" and "#"
         void parseSim()
         {
             
@@ -87,20 +87,30 @@ class Parse
                 if(before.at(j) == '#')
                 {
                     point1 = j;
-                    cout << "hey dude, I am the j for # xoxo " << j << endl;
-                    cout << "hey dude, I am the point2 for # xoxo " << point2 << endl;
-                    cout << "I am the string that never work " << before.substr(point2,point1) << endl;
-                    split.push_back(before.substr(point2,point1));
+//                    cout << "hey dude, I am the j for # xoxo " << j << endl;
+//                    cout << "hey dude, I am the point2 for # xoxo " << point2 << endl;
+//                    cout << "I am the string that never work " << before.substr(point2,point1 - point2) << endl;
+                    split.push_back(before.substr(point2,point1 - point2));
                     break;
                         
                 }
-                if(before.at(j) == ';')
+                else if(before.at(j) == ';')
                 {
                     point1 = j;
                     cout << "j" << point1 << endl;
-                    split.push_back(before.substr(point2,point1));
+//                    cout << "hey dude, I am the point2 for ; xoxo " << point2 << endl;
+//                    cout << "hey dude, I am the point1 for ; xoxo " << point1 << endl;
+//                    cout << "I am the string that never work for ; " << before.substr(point2,point1 - point2) << endl;
+                    split.push_back(before.substr(point2,point1 - point2));
                     point2 = j + 1;
-                    cout << "size now" << before.size() << endl;
+                    point1++;
+                    cout << "size now " << before.size() << endl;
+                }
+                else if(j == (before.size() - 1))
+                {
+                    cout << "check out j " << j << endl;
+                    cout << "check out point1 " << point1 << endl;
+                    split.push_back(before.substr(point1, j - point1 + 1));
                 }
                 //cout << before.at(j) << endl;
             }
@@ -113,6 +123,11 @@ class Parse
 
             
             
+        
+        }
+    
+        void parseLogic()
+        {
         
         }
     
