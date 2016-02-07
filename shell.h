@@ -2,6 +2,7 @@
 #define SHELL_H
 
 #include <iostream>
+#include <string>
 #include "parse.h"
 #include "commandnode.h"
 using namespace std;
@@ -26,15 +27,17 @@ class Shell
 		{
 			start();
 
-			while(status == true)
+			while(status == true)	//user input and parse commands
 			{
-				//user input and parse commands
-				
 				string input; 
+				Parse str;				//parse object
+
+				getline(cin, input);	//get line input
+				//cout << input << endl;
 	
 				if(input != "exit")
 				{
-					//execute each parsed command
+					str.ParseSemi(input);	//parse input
 				}
 				else
 				{ break; }	//if user input is exit then break loop and exit
