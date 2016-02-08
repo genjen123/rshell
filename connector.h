@@ -11,8 +11,17 @@ class Connector
 		string connector_type;	//gets connector type (&&, ||, etc.)
 	
 	public:
-		string getType()	//returns type of the connector
-		{	return connector_type; }
+		Connector(){};			//default constructor
+
+		void connectorType()	//list different types of connectors
+		{
+			//add different connectors here
+		}
+
+		string getType()		//returns type of the connector
+		{ return connector_type; }
+
+
 };
 
 
