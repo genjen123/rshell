@@ -1,4 +1,10 @@
-# rshell
-CS100 Assn02
+**Program summary:**
 
-These are changes jnguy138 has made to the repository in the jenny branch
+
+**Known bugs:**
+
+Bug Description | Terminal output
+--------------- | ---------------
+bug 1 | bug 2
+bug 3 | bug 4
+
