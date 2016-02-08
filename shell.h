@@ -37,7 +37,7 @@ class Shell
 	
 				if(input != "exit")
 				{
-					str.ParseSemi(input);	//parse input
+					str.parseAll(input);	//parse input
 				}
 				else
 				{ break; }	//if user input is exit then break loop and exit
