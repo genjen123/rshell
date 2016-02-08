@@ -9,62 +9,50 @@ using namespace std;
 class Parse
 {
 	private:
-		string str;		//temp variables
-		vector<string> strParts;	
-		//vector<string> splitStr(string input, string pattern);	//vector of split strings
+		//string str;		//temp variables
 
 	public:
 		//default constructors
 		Parse(){}; 	
-		Parse(string input): str(input){}
 
-		void parseAll(string input)
+		//returns vector of split strings
+		vector<string> split(string input, const string &pattern)
 		{
-			input = parseTag(input);
-			parseSemi(input);
-		}
+			vector<string> strPart;
+			int pos = input.find(pattern);		//position of current pattern
+			string tmp;
 
-		string parseTag(string input)	//parses by semi colon and #
-		{
-			string strEdit;
-			int posTag = input.find("#");		//find position of #
-
-			if(posTag != string::npos)			//if found
+			while(pos != string::npos)			//loop if pattern is found
 			{
-				strEdit = input.substr(0, posTag);	//cut string to #
-				//cout << strEdit << endl;
+				tmp = input.substr(0, pos);	
+				strPart.push_back(tmp);			//add part to vector
+
+				input = input.substr(pos + pattern.length());	//new input length
+				pos = input.find(pattern);		//find other occurences of pattern
 			}
-			return strEdit;
+			if(input.length() > 0)				//if string isn't empty
+			{ strPart.push_back(input); }
+
+			return strPart;
 		}
 
-		void parseSemi(string input)
+		string leftTrim(string input, const string &pattern)
 		{
-			int posSemi = input.find(";");	//find position of ;
-			string strEdit;
+			string newStr = "";
+			int pos = input.find(pattern);		//position of current pattern
 
-			while(posSemi != string::npos)
-			{
-				strEdit = input.substr(0, posSemi);		//cut str to ;
-				
-				if(strEdit != " ")
-				{
-					strParts.push_back(strEdit);		//push part to vector
-				}
-
-				//check for spacing later
-
-				input = input.substr(posSemi + 2);		//edit input string
-				posSemi = input.find(";");				//find other ; repeats
-			}	
-			/*
-			for(int i = 0; i < strParts.size(); i++)
-			{
-				cout << strParts.at(i) << endl;
-			}
-			*/
+			return (pos != 0) ? input: input.substr(pattern.length());	//if pos is not 0 then return input
 		}
 
-		string ParseCmd(string input);	//parses by commands (&&, ||, etc.)
+		string rightTrim(string input, const string &pattern)
+		{
+			string newStr;
+
+			//do something here
+
+			return newStr;
+		}
+
 };
 
 #endif
