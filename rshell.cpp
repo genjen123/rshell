@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	Shell sh;			//initialize shell object
+	Shell sh;				//initialize shell object
 	bool status;			//check to cont. shell or not
 
 	sh.initialize();		//start shell program
