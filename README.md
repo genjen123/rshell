@@ -1,12 +1,20 @@
 # <h1> **Program summary:** <h1>
 	
-	This project is the creation of a command shell program called rshell. 
+	This project is the creation of a command shell called rshell. 
 	Main functions of the shell are to print a command prompt (e.g. $), 
-	read in a command and any available connectors (|| or && or ;), and 
-	execute the command(s). The design consists of five main classes, two 
-	of which can be considered as the core of the program. This is to enhance 
-	the program’s efficiency during execution and to maintain a simplistic 
-	design that allows for easy alterations for future developments.
+	read in a command in one line, and execute each command. 
+
+	*Commands will take the form:*
+
+		cmd       = executable [argumentList] [connector cmd]
+		connector = || or && or ;
+
+	The program is able to take in a limitless number of commands as
+	long as they are chained together. 
+
+	*Example:* $ ls -a
+						**OR**
+			   $ ls -a; echo hello; mkdir test
 
 # <h1> **Known bugs:** <h1>
 
