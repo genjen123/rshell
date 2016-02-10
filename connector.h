@@ -1,8 +1,9 @@
 #ifndef CONNECTOR_H
 #define CONNECTOR_H
 
-//#include <iostream>
+#include <iostream>
 #include <string>
+#include "parse.h"
 using namespace std;
 
 class Connector
@@ -11,18 +12,22 @@ class Connector
 		string connector_type;	//gets connector type (&&, ||, etc.)
 	
 	public:
-		Connector(){};			//default constructor
+		//default constructors
+		Connector(){};			
+		Connector(const string &connector)
+		{ connector_type = connector; }
 
-		void connectorType()	//list different types of connectors
-		{
-			//add different connectors here
-		}
+		ostream& operator <<(ostream& os, const Connector c);
 
-		string getType()		//returns type of the connector
+		string getType() const		//returns type of the connector
 		{ return connector_type; }
-
-
 };
+
+ostream& operator <<(ostream& os, const Connector c)
+{
+	os << c.getType();
+	return os;
+}
 
 
 

@@ -12,9 +12,10 @@ int main()
 	sh.initialize();		//start shell program
 	status = sh.getStatus();
 	
-	if(status == true)
+	if(status)
 	{
 		//cont. looping shell program
+		return 1;
 	}
 	else 
 	{ return 0; }	//end and exit program	
