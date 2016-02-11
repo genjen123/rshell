@@ -12,8 +12,8 @@
 	The program is able to take in a limitless number of commands as
 	long as they are chained together. 
 
-	*Example:* $ ls -a
-						**OR**
+#	*Example:* $ ls -a
+#						**OR**
 			   $ ls -a; echo hello; mkdir test
 
 # <h1> **Known bugs:** <h1>
