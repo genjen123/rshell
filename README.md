@@ -1,4 +1,4 @@
-# <h1> **Program summary:** <h1>
+# **Program summary:**
 	
 	This project is the creation of a command shell called rshell. 
 	Main functions of the shell are to print a command prompt (e.g. $), 
@@ -12,11 +12,11 @@
 	The program is able to take in a limitless number of commands as
 	long as they are chained together. 
 
-#	*Example:* $ ls -a
-#						**OR**
+	*Example:* $ ls -a
+						<b>OR</b>
 			   $ ls -a; echo hello; mkdir test
 
-# <h1> **Known bugs:** <h1>
+# **Known bugs:**
 
 	Below is a table of known bugs that we have recorded during our testings. 
 	Note that this table does not reflect all possible errors available in the 
