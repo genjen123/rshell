@@ -1,7 +1,6 @@
 # **Program summary:**
 	
-	This project is the creation of a command shell called rshell. 
-	Main functions of the shell are to print a command prompt (e.g. $), 
+	> This project is the creation of a command shell called rshell. Main functions of the shell are to print a command prompt (e.g. $), 
 	read in a command in one line, and execute each command. 
 
 	*Commands will take the form:*
@@ -13,7 +12,7 @@
 	long as they are chained together. 
 
 	*Example:* $ ls -a
-						<b>OR</b>
+						OR
 			   $ ls -a; echo hello; mkdir test
 
 # **Known bugs:**
