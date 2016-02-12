@@ -16,11 +16,11 @@ using namespace std;
  
  Back to the logic part, so we check whwat previous one return and then we decide are we gonna run the second or not, 
  
- if our connector is && we are only gonna run it when it returns 0. 
+ if our connector is && we are only gonna run the second command when it returns 0.
  
- If our connector is ||, we are only run the next command when the first one return a non zero exit status.
+ If our connector is ||, we are only gonna run the next command when the first one return a non zero exit status.
  
- If our connector is ;, we don't care if the previou i success or not.
+ If our connector is ;, we don't care if the previou one is  success or not, we will just run the second command.
  
  That's the three logic I find.
  
