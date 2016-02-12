@@ -12,11 +12,16 @@
 > The program is able to take in a limitless number of commands as
 > long as they are chained together. 
 
-**Example:** 
+**Example:**
+
 	$ ls -a
-			**OR**
+
+###### OR
+
 	$ ls -a; echo hello; mkdir test
-				**OR**
+	
+###### OR
+
 	$ ls -a; echo hello && mkdir test || echo world; git status
 
 **Basic Program Execution:**
