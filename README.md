@@ -13,6 +13,7 @@
 > long as they are chained together. 
 
 **Example:** 
+
 	$ ls -a
 			**OR**
 	$ ls -a; echo hello; mkdir test
