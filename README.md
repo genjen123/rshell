@@ -17,7 +17,7 @@
 	$ ls -a
 			**OR**
 	$ ls -a; echo hello; mkdir test
-				**OR**
+			**OR**
 	$ ls -a; echo hello && mkdir test || echo world; git status
 
 **Basic Program Execution:**
