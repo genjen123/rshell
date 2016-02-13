@@ -4,3 +4,6 @@
 
 #do not print
 mkdir create #do not print
+echo "output this" #just not this
+#exit
+				######

@@ -1,17 +1,12 @@
 !#/bin/sh 
 
-#tests single commands < 
-bin/rhsell < Guard
+#tests single commands 
 
 ls -a 
-ls -la
-ls-a
 ls
 mkdir file
-echo hello
-git status
+		echo 		hello
 mkdir
 mv
-echo "some"
-
-Guard
+echo some
+error
