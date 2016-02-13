@@ -9,50 +9,110 @@ using namespace std;
 class Parse
 {
 	private:
-		//string str;		//temp variables
-
+		string str;					//temp variable
+		vector<string> strParts;			
+  
 	public:
 		//default constructors
 		Parse(){}; 	
+		Parse(string input): str(input){}
 
-		//returns vector of split strings
+		void parseAll(string input)
+		{
+			input = parseTag(input);
+			parseSemi(input);
+		}
+
+		string parseTag(string input)	//parses by #
+		{
+			string strEdit;
+			int posTag = input.find("#");			//find position of #
+
+			if(int(posTag) != int(string::npos))	//if found
+			{
+				strEdit = input.substr(0, posTag);	//cut string to #
+				//cout << strEdit << endl;
+			}
+			return strEdit;
+		}
+
+		void parseSemi(string input)
+		{
+			int posSemi = input.find(";");	//find position of ;
+			string strEdit;
+
+			while(int(posSemi) != int(string::npos))	//if found 
+			{
+				strEdit = input.substr(0, posSemi);		//cut str to ;
+
+				if(strEdit != " ")						//if !empty push to part to vector
+				{ strParts.push_back(strEdit); }
+
+				input = input.substr(posSemi + 2);		//edit input string
+				posSemi = input.find(";");				//find other ; repeats
+			}	
+			/*
+			for(int i = 0; i < strParts.size(); i++)
+			{
+			cout << strParts.at(i) << endl;
+			}
+			*/
+		}
+
 		vector<string> split(string input, const string &pattern)
 		{
-			vector<string> strPart;
-			int pos = input.find(pattern);		//position of current pattern
-			string tmp;
+			//initialize variables and values
+			vector<string> values;    
+			int found = input.find(pattern);	//find position of pattern
+			string part = "";
 
-			while(pos != string::npos)			//loop if pattern is found
+			while(int(found) != int(string::npos))	//if found
 			{
-				tmp = input.substr(0, pos);	
-				strPart.push_back(tmp);			//add part to vector
-
-				input = input.substr(pos + pattern.length());	//new input length
-				pos = input.find(pattern);		//find other occurences of pattern
+				part = input.substr(0,found);		//cut string to pattern
+				values.push_back(part);				//add string to vector
+				input = input.substr(found+pattern.length());	//edit input string
+				found = input.find(pattern);		//find other pattern repeats
 			}
-			if(input.length() > 0)				//if string isn't empty
-			{ strPart.push_back(input); }
-
-			return strPart;
+			
+			if(input.length() > 0)		//if input !empty
+			{ values.push_back(input); }
+			
+			return values;
 		}
 
-		string leftTrim(string input, const string &pattern)
+		string ltrim(string input, const string &pattern)
 		{
-			string newStr = "";
-			int pos = input.find(pattern);		//position of current pattern
+			string newString = "";
+			int found = input.find(pattern);	//find pos of pattern
 
-			return (pos != 0) ? input: input.substr(pattern.length());	//if pos is not 0 then return input
+			//if found then return input else new input string
+			return (found !=  0) ? input : input.substr(pattern.length());
 		}
 
-		string rightTrim(string input, const string &pattern)
+		string ltrimr(string input, const string &pattern)
 		{
-			string newStr;
+			string newString = "";
+			int found = input.find(pattern);	//find pos of pattern
 
-			//do something here
+			if(int(found) != 0)					//if !found then input stays same
+			{ return input; }
+			
+			newString = input;
 
-			return newStr;
+			while(int(found) != int(string::npos))	//while pattern is found
+			{
+				newString = newString.substr(pattern.length());
+				found = newString.find(pattern);
+			}
+
+			return newString;
 		}
 
+		string rtrim(string input, const string &pattern)
+		{
+			string newString = "";
+			return newString;
+		}
 };
 
 #endif
