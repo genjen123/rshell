@@ -3,25 +3,21 @@ CXXFLAGS = -Wall -Werror -ansi -pedantic
 #CXXFLAGS = -g
 
 OBJECTS =
-MAIN = rshell.cpp
+srcDIR="src"
+MAIN = src/rshell.cpp
 EXE = rshell
-HEADERS = shell.h parse.h connector.h command.h commandnode.h 
+HEADERS = src/shell.h src/parse.h src/connector.h src/command.h src/commandnode.h 
 CPP = 
 TAR = rshell.tar
 TARLIST = rshell.cpp $(CPP) $(HEADERS) $(DICTLIST) $(EXE)
 EXEDIR=bin
 #createDIR :=$(bash mkdir -p $(EXEDIR))
 
+
 all: $(HEADERS) $(MAIN)
 	#Figure out a better way to do this
 	mkdir -p $(EXEDIR)
 	$(CXX) $(CXXFLAGS) -o $(EXEDIR)/$(EXE) $(MAIN)
-
-compress:
-	tar -czvf $(TAR) $(TARLIST) $(EXE) makefile
-
-uncompress:
-	tar -xzvf $(TAR)
 
 run:
 	make clean
