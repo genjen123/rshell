@@ -1,5 +1,7 @@
+//std included
 #include <iostream>
 #include <stdlib.h>
+//files included
 #include "shell.h"
 #include "parse.h"
 using namespace std;
@@ -15,9 +17,9 @@ int main()
 	if(status)
 	{
 		//cont. looping shell program
+		cerr << "The shell did not exit properly :(" << endl;
 		return 1;
 	}
 	else 
 	{ return 0; }	//end and exit program	
-
 }
