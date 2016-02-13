@@ -1,7 +1,9 @@
 #ifndef COMMANDNODE_H
 #define COMMANDNODE_H
 
+//std included
 #include <iostream>
+//files included
 #include "connector.h"
 #include "command.h"
 using namespace std;
