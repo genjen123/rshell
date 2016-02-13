@@ -1,10 +1,11 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+//standard library included
 #include <iostream>
 #include <string>
 #include <vector>
-
+//files included
 #include "parse.h"
 using namespace std;
 
