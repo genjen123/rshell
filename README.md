@@ -42,8 +42,12 @@
 Bug | Description
 --------------- | ---------------
 Space readings | A space before a command will produce an error
-Echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted
+Echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted (vary on systems)
 Exit | Exit will work if it is a single command that is not chained together
 ls | ls will work as a command however, ls -a may or may not work
 
-**Note:** Any program that's bash specific may not work for the shell. However, standard cd commands can.
+**Notes:** 
+
+- Any program that's bash specific may not work for the shell. However, standard cd commands can.
+- Some recorded bugs (like ls and echo) are only bugs found when running on our personal work environment. So if the program is normally run on hammer then they are perfectly functional.
+- Any commands taken in input from ~ will not be run properly. If it needs to be implemented then it could be substituted for the user's homepath. 
