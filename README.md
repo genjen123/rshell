@@ -42,7 +42,7 @@
 Bug | Description
 --------------- | ---------------
 Space readings | A space before a command will produce an error
-echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted
-exit | exit will work if it is a single command that is not chained together
+Echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted
+Exit | Exit will work if it is a single command that is not chained together
 
 **Note:** Any program that's bash specific may not work for the shell. However, standard cd commands can.
