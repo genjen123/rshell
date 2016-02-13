@@ -44,5 +44,6 @@ Bug | Description
 Space readings | A space before a command will produce an error
 Echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted
 Exit | Exit will work if it is a single command that is not chained together
+ls | ls will work as a command however, ls -a may or may not work
 
 **Note:** Any program that's bash specific may not work for the shell. However, standard cd commands can.
