@@ -39,9 +39,10 @@
 > that does not mean that the code will function any less than the quality 
 > desired. 
 
-Bug Description | Terminal Output
+Bug | Description
 --------------- | ---------------
-bug 1 | bug 2
-bug 3 | bug 4
+Space readings | A space before a command will produce an error
+echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted
+exit | exit will work if it is a single command that is not chained together
 
-**Note:** Any program that's bash specific will not work for the shell. 
+**Note:** Any program that's bash specific may not work for the shell. However, standard cd commands can.
