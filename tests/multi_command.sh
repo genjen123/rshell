@@ -1,9 +1,5 @@
 #!/bin/sh
 
 #tests commmands with ;, &&, or ||
-
-		ls; 		pwd;
-ls || cd || pwd
-ls -a; echo hello; mkdir test2
-git status; pwd && echo $PWD || ls -a
-pwd; cd .. && ls || mkdir hit
+make all
+echo -e "ls;		pwd;\nls || cd || pwd\nls -a; echo hello; mkdir test2\npwd && echo pwd || ls -a\npwd; cd .. && ls || mkdir hit\nexit\n" | bin/rshell

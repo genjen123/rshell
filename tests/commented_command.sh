@@ -1,9 +1,5 @@
 #!/bin/sh
 
 #tests commands with comments
-
-#do not print
-mkdir create #do not print
-echo "output this" #just not this
-#exit
-				######
+make all
+echo -e "#do not print\necho output\n#exit\nexit\n" | bin/rshell
