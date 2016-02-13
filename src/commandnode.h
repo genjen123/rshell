@@ -32,7 +32,7 @@ class CommandNode: public Command, public Connector
 		friend ostream& operator <<(ostream& os, const CommandNode cn);
 };
 
-ostream& operator <<(ostream& os, const commandNode cn)
+ostream& operator <<(ostream& os, const CommandNode cn)
 {
 	os << cn.getCommand() << " " << cn.getConnector();
 	return os;
