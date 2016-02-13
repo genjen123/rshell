@@ -1,12 +1,5 @@
 !#/bin/sh 
 
 #tests single commands 
-
-ls -a 
-ls
-mkdir file
-		echo 		hello
-mkdir
-mv
-echo some
-error
+make all
+echo -e "ls -a\nls\nmkdr file\n      echo    hello\nmkdir\nmv\necho some\nerror\nexit\n" | bin/rshell
