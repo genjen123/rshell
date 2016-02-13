@@ -12,6 +12,7 @@
 > The program is able to take in a limitless number of commands as
 > long as they are chained together. 
 
+<<<<<<< HEAD
 **Example:**
 
 	$ ls -a
@@ -22,6 +23,18 @@
 	
 ###### OR
 
+=======
+**Example:** 
+
+	$ ls -a
+			
+###### OR
+			
+	$ ls -a; echo hello; mkdir test
+			
+###### OR
+			
+>>>>>>> 5e7e622286d4e8c4a36d7fd09541733dd3f278a0
 	$ ls -a; echo hello && mkdir test || echo world; git status
 
 **Basic Program Execution:**
