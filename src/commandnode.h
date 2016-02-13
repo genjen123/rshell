@@ -21,10 +21,10 @@ class CommandNode: public Command, public Connector
 			con = Connector(connector);
 		}
 
-		Command getCommand()		//get command
+		Command getCommand() const		//get command
 		{ return c; }
 
-		Connector getConnector()	//get connector
+		Connector getConnector() const	//get connector
 		{ return con; }
 
 		friend ostream& operator <<(ostream& os, const CommandNode cn);
