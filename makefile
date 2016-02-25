@@ -19,6 +19,11 @@ all: $(HEADERS) $(MAIN)
 	mkdir -p $(EXEDIR)
 	$(CXX) $(CXXFLAGS) -o $(EXEDIR)/$(EXE) $(MAIN)
 
+rshell: $(HEADERS) $(MAIN)
+	#Figure out a better way to do this
+	mkdir -p $(EXEDIR)
+	$(CXX) $(CXXFLAGS) -o $(EXEDIR)/$(EXE) $(MAIN)
+
 run:
 	make clean
 	make all
