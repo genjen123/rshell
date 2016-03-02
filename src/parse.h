@@ -161,6 +161,7 @@ class Parse
                             {
                                 part += " ||";
                                 input = input.substr(temp2 + 1);
+                            
                             }
                         }
                         
