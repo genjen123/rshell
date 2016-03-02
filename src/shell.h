@@ -91,16 +91,32 @@ class Shell
 					{
 						returnStatus = false;
 						child = false;
+						cout << errno << endl;
 					}
 					else
 					{
 						returnStatus = true;
 						child = false;
 					}
+
+					if(status == 0)
+					{
+						//cout << "command true w/ status" << status << endl;
+						returnStatus = true;
+						child = false;
+						//cout << "TRUE" << endl;
+					}
+					else
+					{
+						returnStatus = false;
+						child = false;
+						//cout << "FALSE" << endl;
+					}
 				}
 				else if(pid == 0)
 				{
 					// I am the child process
+					child = true;
 					//cout << "child start" << endl;
 					//execute command
 					//What about ~ in command?
@@ -129,6 +145,7 @@ class Shell
 					//cout << "execvp" << endl;
 
 					int status = 0; 
+					child = true;
 					status = execvp(command.c_str(),arguementList);
 
 					//cout << "status::"<< status << endl;
@@ -197,6 +214,10 @@ class Shell
 				//Parse input
 				Parse p;				//parse object
 				input = p.ltrimr(input," ");
+				input = p.ltrimr(input, "\t");
+
+				if(input == "")			//continue regardless
+				{ continue; }
 				//cout << input << endl;
 				
 				if(input != "exit")
@@ -275,19 +296,39 @@ class Shell
 						CommandNode currentNode = commandList[i];
 						Connector con = currentNode.getConnector();
 						bool run = false;
+						string cmdstr = p.ltrim(currentNode.getCommand().getExec(), " ");
+
+						//if input starts w/ connectors
+						if(cmdstr == "||")
+						{
+							cerr << "rshell: syntax error near unexpected token \'||\'" << endl;
+							break;
+						}
+						else if(cmdstr == "&&")
+						{
+							cerr << "rshell: syntax error near unexpected token \'||\'" << endl;
+							break;
+						}
 
 						//skip logic
 						if(chainStatus)
-						{ run = true; }
+						{
+							if(preCon.isOR())
+							{ run = false; }
+							else if(preCon.isAND())
+							{ run = true; }
+							else
+							{ run = true; }
+						}
 						else
 						{
-							if(con.isOR())
+							if(preCon.isOR())
 							{
 								//cout << "has ||" << endl;
 								run = true;
 								chainStatus = true;
 							}
-							else if(con.isAND())
+							else if(preCon.isAND())
 							{
 								//cout << "has &&" << endl;
 								run = false;
@@ -303,9 +344,21 @@ class Shell
 						if(run)
 						{
 							pair<bool,bool> ret;
+
+							//check if command is exit
+							string exitcmd = p.ltrimr(commandList[i].getCommand().getExec(), " ");
+							if(exitcmd == "exit")
+							{
+								finish();
+								return;
+							}
+
 							ret = execute(commandList[i]);
 							currentReturnStatus = ret.first;
 							child = ret.second;
+
+							if(child)
+							{ break; }
 
 							//assign new status
 							chainStatus = currentReturnStatus && chainStatus;
