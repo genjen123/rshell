@@ -13,8 +13,12 @@ TARLIST = rshell.cpp $(CPP) $(HEADERS) $(DICTLIST) $(EXE)
 EXEDIR=bin
 #createDIR :=$(bash mkdir -p $(EXEDIR))
 
-
 all: $(HEADERS) $(MAIN)
+	#Figure out a better way to do this
+	mkdir -p $(EXEDIR)
+	$(CXX) $(CXXFLAGS) -o $(EXEDIR)/$(EXE) $(MAIN)
+
+rshell: $(HEADERS) $(MAIN)
 	#Figure out a better way to do this
 	mkdir -p $(EXEDIR)
 	$(CXX) $(CXXFLAGS) -o $(EXEDIR)/$(EXE) $(MAIN)
