@@ -14,6 +14,7 @@
 //files included
 #include "parse.h"
 #include "commandnode.h"
+#include "test.h"
 using namespace std;
 
 class Shell
@@ -63,7 +64,6 @@ class Shell
 					chdir(getenv("HOME"));
 					//cout << "error:" << errno << endl;
 				}
-				cout << errno << endl;
 				if(errno)
 				{
 					cout << "rshell: " << exe << ": " +  cn.getCommand().getArgListStr() << ": " << strerror(errno) << endl;
@@ -76,21 +76,10 @@ class Shell
 					return make_pair(true,child);
 				}
 			}
-			/*else if(exe == "test")					//check to see if cmd is test
+			else if(exe == "test")					//check to see if cmd is test
 			{
-				if("-e" || " ")
-				{
-					//check if file/dir exists
-				}
-				else if("-f")						//check if it's reg file
-				{
-
-				}
-				else if("-d")						//check if it's a directory
-				{
-
-				}
-			}*/
+				//runTest();
+			}
 			else
 			{
 				pid_t pid = fork();
