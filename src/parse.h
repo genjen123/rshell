@@ -59,6 +59,8 @@ class Parse
 			*/
 		}
 
+		string ParseCmd(string input);
+		
 		vector<string> split(string input, const string &pattern)
 		{
 			//initialize variables and values
@@ -85,7 +87,7 @@ class Parse
 			string newString = "";
 			int found = input.find(pattern);	//find pos of pattern
 
-			//if found then return input else new input string
+			//if not found then return input else new input string
 			return (found !=  0) ? input : input.substr(pattern.length());
 		}
 
