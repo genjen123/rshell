@@ -215,17 +215,28 @@ class Shell
 				Parse p;				//parse object
 				input = p.ltrimr(input," ");
 				input = p.ltrimr(input, "\t");
-
+                //cout << "I am here" << endl;
+                
+                for(int i = 0; i < check.size(); ++i)
+                {
+                    cout << "values " << check.at(i) << endl;
+                }
+                
 				if(input == "")			//continue regardless
 				{ continue; }
-				//cout << input << endl;
-				
+				cout << "input " << input << endl;
+                vector<string> check = p.parenthesis(input);
+
 				if(input != "exit")
 				{
 					//Split inputs on # and ignore everything afterwards
 					string commands = p.split(input,"#")[0];
-					
-					//Split on ';'
+										//Split on ';'
+                    //here i am not sure because i dont know how am I gonna call parenthesis and then call this ";"
+//                    for(unsigned int i = 0; i < check.size(); i++)
+//                    {
+//                        
+//                    }
 					vector<string> commandParts = p.split(commands,";");
 					
 					//Now go through command parts and create List of commandNode
@@ -234,7 +245,7 @@ class Shell
 
 					for(unsigned int i = 0; i < commandParts.size(); i++)
 					{
-						//cout << commandParts[i] << endl;
+						cout << "commandParts " << commandParts[i] << endl;
 						//Parse now on || and &&
 						command = commandParts[i];
 						string tmp = "";
@@ -244,7 +255,7 @@ class Shell
 
 						while( (int(orIndex) != int(string::npos)) or (int(andIndex) != int(string::npos)) )
 						{
-							//cout << command << endl;
+							cout << "command " << command << endl;
 							int first = 0;
 
 							if( (int(orIndex) != int(string::npos)) && (int(andIndex) != int(string::npos)) )
@@ -282,7 +293,11 @@ class Shell
 						if(command.length() > 0)
 						{ commandList.push_back(CommandNode(command,";")); }
 					}
-					//cout << commandList.size() << endl;
+                    for(int i = 0; i < commandList.size(); ++i)
+                    {
+                        cout << "index " << i  << "content " << commandList.at(i) << endl;
+                    }
+					cout << "commandSize" << commandList.size() << endl;
 					//Now for through each command in commandList and exectue them if possible
 					//https://en.wikipedia.org/wiki/Bash_(Unix_shell)
 
