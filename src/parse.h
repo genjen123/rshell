@@ -10,8 +10,7 @@ class Parse
 {
 	private:
 		string str;					//temp variable
-		vector<string> strParts;			
-  
+		vector<string> strParts;
 	public:
 		//default constructors
 		Parse(){}; 	
@@ -35,8 +34,7 @@ class Parse
 			}
 			return strEdit;
 		}
-
-		void parseSemi(string input)
+    		void parseSemi(string input)
 		{
 			int posSemi = input.find(";");	//find position of ;
 			string strEdit;
@@ -81,6 +79,113 @@ class Parse
 			
 			return values;
 		}
+
+    
+        vector<string> parenthesis(string input)
+        {
+            vector<string>values;
+            int found1 = input.find("(");
+            int found2 = 0;
+            int temp1 = 0;
+            int temp2 = 0;
+            int start = 0;
+            string part = "";
+            //cout << "hi" << endl;
+            
+            while(int(found1) != int(string::npos))
+            {
+                if(start < found1)
+                {
+                    part = input.substr(start, found1 - start);
+                    if(part.size() != 0)
+                    {
+                        values.push_back(part);
+                    }
+                    
+                    //cout << "input" << input << endl;
+                }
+                found2 = input.find(")");
+                
+                if(int(found2) == int(string::npos))
+                {
+                    cout << "broken parenthesis,dude enter a new one" << endl;
+                }
+                if(int(found2) != int(string::npos))
+                {
+                    part = input.substr(found1 + 1, found2 - found1 - 1);
+                    input = input.substr(found2 + 1);
+
+                    cout << "I am the input 1 " << input << endl;
+                    temp1 = input.find("&");
+                    temp2 = input.find("|");
+                    cout << "temp1 " << temp1 << endl;
+                    cout << "temp2 " << temp2 << endl;
+
+                    if((int(temp1) != int(string::npos))|| (int(temp2) != int(string::npos)))
+                    {
+                        cout << "hi I am here" << endl;
+                        if((temp1 < temp2) && (temp1 != -1))
+                        {
+                            temp1++;
+                            if(input.at(temp1) == '&')
+                            {
+                                part += "&&";
+                                input = input.substr(temp1 + 1);
+                            }
+                            
+                        }
+                        else if((temp2 < temp1) && (temp2 != -1))
+                        {
+                            temp2++;
+                            if(input.at(temp2) == '|')
+                            {
+                                part += "||";
+                                input = input.substr(temp2 + 1);
+                            }
+                        }
+                        else if (temp1 != -1)
+                        {
+                            temp1++;
+                            if(input.at(temp1) == '&')
+                            {
+                                part += "&&";
+                                input = input.substr(temp1 + 1);
+
+                            }
+                        }
+                        else if(temp2 != -1)
+                        {
+                            
+                            temp2++;
+                            if(input.at(temp1) == '|')
+                            {
+                                part += "||";
+                                input = input.substr(temp2 + 1);
+                            }
+                        }
+                        
+                    }
+                    
+                    if(part.size() != 0)
+                    {
+                        values.push_back(part);
+                    }
+                }
+                
+                
+                
+                found1 = input.find("(");
+            
+            }
+            
+            if(input.size() != 0)
+            {
+                values.push_back(input);
+            }
+            
+            
+            return values;
+        }
 
 		string ltrim(string input, const string &pattern)
 		{
