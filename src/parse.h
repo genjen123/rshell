@@ -129,7 +129,7 @@ class Parse
                             temp1++;
                             if(input.at(temp1) == '&')
                             {
-                                part += "&&";
+                                part += " &&";
                                 input = input.substr(temp1 + 1);
                             }
                             
@@ -139,7 +139,7 @@ class Parse
                             temp2++;
                             if(input.at(temp2) == '|')
                             {
-                                part += "||";
+                                part += " ||";
                                 input = input.substr(temp2 + 1);
                             }
                         }
@@ -148,7 +148,7 @@ class Parse
                             temp1++;
                             if(input.at(temp1) == '&')
                             {
-                                part += "&&";
+                                part += " &&";
                                 input = input.substr(temp1 + 1);
 
                             }
@@ -157,9 +157,9 @@ class Parse
                         {
                             
                             temp2++;
-                            if(input.at(temp1) == '|')
+                            if(input.at(temp2) == '|')
                             {
-                                part += "||";
+                                part += " ||";
                                 input = input.substr(temp2 + 1);
                             }
                         }
