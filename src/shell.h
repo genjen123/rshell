@@ -237,15 +237,100 @@ class Shell
                     vector< vector <string> > wonderful;
                     for(unsigned int i = 0; i < check.size(); i++)
                     {
-                        wonderful.push_back(p.split(check.at(i),";"));
+                        if(check.at(i).size() > 1)
+                        {
+                            wonderful.push_back(p.split(check.at(i),";"));
+                        }
                     }
+//                    
+//                    for(unsigned int i = 0; i < wonderful.size(); i++)
+//                    {
+//                        for(unsigned int j = 0; j < wonderful.at(i).size(); ++j)
+//                        {
+//                            cout << "I am wonderful " << wonderful.at(i).at(j) << " size " << wonderful.at(i).at(j).size() <<  endl;
+//                        }
+//                    
+//                    }
+                    
 
 					vector<string> commandParts = p.split(commands,";");
 					
 					//Now go through command parts and create List of commandNode
 					string command = "";
 					vector<CommandNode> commandList;
+                    //new adding
+                    
+                    string command1 = "";
+                    vector< vector <CommandNode> > commandList1(wonderful.size());
+                    
+                    for(unsigned int i = 0; i < wonderful.size(); i++)
+                    {
+                        for(unsigned int j = 0; j < wonderful.at(i).size(); j++)
+                        {
+                            cout << "I am wonderful " << wonderful.at(i).at(j) << " size " << wonderful.at(i).at(j).size() <<  endl;
+                            command1 = wonderful.at(i).at(j);
+                            string tmp = "";
+                            int orIndex = command1.find("||");
+                            int andIndex = command1.find("&&");
+                            string connector ="";
+                            
+                            while( (int(orIndex) != int(string::npos)) or (int(andIndex) != int(string::npos)) )
+                            {
+                                cout << "command " << command1 << endl;
+                                int first = 0;
+                                
+                                if( (int(orIndex) != int(string::npos)) && (int(andIndex) != int(string::npos)) )
+                                {
+                                    //first = (orIndex < andIndex) ? orIndex : andIndex;
+                                    if(orIndex < andIndex)
+                                    {
+                                        first = orIndex;
+                                        connector = "||";
+                                    }
+                                    else if(orIndex > andIndex)
+                                    {
+                                        first = andIndex;
+                                        connector = "&&";
+                                    }
+                                }
+                                else if( (int(orIndex) != int(string::npos)) && (int(andIndex) == int(string::npos)) )
+                                {
+                                    first = orIndex;
+                                    connector = "||";
+                                }
+                                else if ( (int(orIndex) == int(string::npos)) && (int(andIndex) != int(string::npos)) )
+                                {
+                                    first = andIndex;
+                                    connector = "&&";
+                                }
+                                
+                                tmp = command1.substr(0,first);
+                                commandList1.at(i).push_back(CommandNode(tmp,connector));
+                                cout << "check" << endl;
+                                command1 = command1.substr(first+connector.length());
+                                orIndex = command1.find("||");
+                                andIndex = command1.find("&&");
+                            }
+                            
+                            if(command1.length() > 0)
+                            { commandList1.at(i).push_back(CommandNode(command1,";")); }
+                            
+                        }
+                        
+                    }
+                    cout << "commandSize" << commandList1.size() << endl;
+                    for(int i = 0; i < commandList1.size(); ++i)
+                    {
+                        cout << "i " << i << endl;
+                        for(int j = 0; j < commandList1.at(i).size(); ++j)
+                        {
+                            cout << "index " << j  << "content " << commandList.at(i).at(j) << endl;
+                            
+                        }
+                        
+                    }
 
+                    
 					for(unsigned int i = 0; i < commandParts.size(); i++)
 					{
 						cout << "commandParts " << commandParts[i] << endl;
