@@ -63,7 +63,7 @@ class Shell
 					chdir(getenv("HOME"));
 					//cout << "error:" << errno << endl;
 				}
-				
+				cout << errno << endl;
 				if(errno)
 				{
 					cout << "rshell: " << exe << ": " +  cn.getCommand().getArgListStr() << ": " << strerror(errno) << endl;
@@ -76,6 +76,21 @@ class Shell
 					return make_pair(true,child);
 				}
 			}
+			/*else if(exe == "test")					//check to see if cmd is test
+			{
+				if("-e" || " ")
+				{
+					//check if file/dir exists
+				}
+				else if("-f")						//check if it's reg file
+				{
+
+				}
+				else if("-d")						//check if it's a directory
+				{
+
+				}
+			}*/
 			else
 			{
 				pid_t pid = fork();
@@ -91,7 +106,7 @@ class Shell
 					{
 						returnStatus = false;
 						child = false;
-						cout << errno << endl;
+						//cout << errno << endl;
 					}
 					else
 					{
