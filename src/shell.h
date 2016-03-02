@@ -168,7 +168,8 @@ class Shell
 					cerr << "Fork failed" << endl;
 					returnStatus = false;
 					child = true;
-				}
+				
+                }
 			}
 			//cout << "child end" << endl;
 			//check status
