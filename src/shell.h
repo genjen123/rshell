@@ -217,26 +217,29 @@ class Shell
 				input = p.ltrimr(input, "\t");
                 //cout << "I am here" << endl;
                 
-                for(int i = 0; i < check.size(); ++i)
-                {
-                    cout << "values " << check.at(i) << endl;
-                }
+              
                 
 				if(input == "")			//continue regardless
 				{ continue; }
 				cout << "input " << input << endl;
-                vector<string> check = p.parenthesis(input);
+               
 
 				if(input != "exit")
 				{
 					//Split inputs on # and ignore everything afterwards
 					string commands = p.split(input,"#")[0];
 										//Split on ';'
-                    //here i am not sure because i dont know how am I gonna call parenthesis and then call this ";"
-//                    for(unsigned int i = 0; i < check.size(); i++)
-//                    {
-//                        
-//                    }
+                    vector<string> check = p.parenthesis(input);
+                    for(int i = 0; i < check.size(); ++i)
+                    {
+                        cout << "values " << check.at(i) << endl;
+                    }
+                    vector< vector <string> > wonderful;
+                    for(unsigned int i = 0; i < check.size(); i++)
+                    {
+                        wonderful.push_back(p.split(check.at(i),";"));
+                    }
+
 					vector<string> commandParts = p.split(commands,";");
 					
 					//Now go through command parts and create List of commandNode
