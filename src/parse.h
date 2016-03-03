@@ -55,6 +55,7 @@ class Parse
 			cout << strParts.at(i) << endl;
 			}
 			*/
+            
 		}
 
 		string ParseCmd(string input);
