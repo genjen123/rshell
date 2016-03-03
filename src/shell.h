@@ -222,7 +222,7 @@ class Shell
                 
 				if(input == "")			//continue regardless
 				{ continue; }
-				cout << "input " << input << endl;
+				//cout << "input " << input << endl;
                
 
 				if(input != "exit")
@@ -231,10 +231,10 @@ class Shell
 					string commands = p.split(input,"#")[0];
 										//Split on ';'
                     vector<string> check = p.parenthesis(input);
-                    for(int i = 0; i < check.size(); ++i)
-                    {
-                        cout << "values " << check.at(i) << endl;
-                    }
+//                    for(int i = 0; i < check.size(); ++i)
+//                    {
+//                        cout << "values " << check.at(i) << endl;
+//                    }
                     vector< vector <string> > wonderful;
                     
                     for(unsigned int i = 0; i < check.size(); i++)
@@ -245,34 +245,44 @@ class Shell
                             
                         }
                     }
-//                    
-//                    for(unsigned int i = 0; i < wonderful.size(); i++)
-//                    {
-//                        for(unsigned int j = 0; j < wonderful.at(i).size(); ++j)
-//                        {
-//                            cout << "I am wonderful " << wonderful.at(i).at(j) << " size " << wonderful.at(i).at(j).size() <<  endl;
-//                        }
-//                    
-//                    }
+                    
+                    for(unsigned int i = 0; i < wonderful.size(); i++)
+                    {
+                        for(unsigned int j = 0; j < wonderful.at(i).size(); ++j)
+                        {
+                            cout << "I am wonderful " << wonderful.at(i).at(j) << " size " << wonderful.at(i).at(j).size() <<  endl;
+                        }
+                    
+                    }
                     
 
 					vector<string> commandParts = p.split(commands,";");
 					
 					//Now go through command parts and create List of commandNode
 					string command = "";
-					vector<CommandNode> commandList;
+					//vector<CommandNode> commandList;
                     //new adding
                     
                     string command1 = "";
                     vector<CommandNode> commandList1;
                     vector<int>count;
                     int number = 0;
+                    //int checkP = 0;
                     for(unsigned int i = 0; i < wonderful.size(); i++)
                     {
-                        number = 0;
+                        //number = 0;
+                        
                         for(unsigned int j = 0; j < wonderful.at(i).size(); j++)
                         {
-                            cout << "I am wonderful " << wonderful.at(i).at(j) << " size " << wonderful.at(i).at(j).size() <<  endl;
+//                            checkP = wonderful.at(i).at(j).find("p");
+//                            if(int(checkP) != int(string::npos))
+//                            {
+//                                count.push_back(number);
+//                                cout << "number " << number << endl;
+//                                wonderful.at(i).at(j).pop_back();
+//
+//                            }
+                            cout << "I am wonderful " << wonderful.at(i).at(j) << " size " << wonderful.at(i).at(j).size() << " i " << i << " j " << j <<  endl;
                             command1 = wonderful.at(i).at(j);
                             string tmp = "";
                             int orIndex = command1.find("||");
@@ -281,7 +291,7 @@ class Shell
                             
                             while( (int(orIndex) != int(string::npos)) or (int(andIndex) != int(string::npos)) )
                             {
-                                cout << "command " << command1 << endl;
+                                //cout << "command " << command1 << endl;
                                 int first = 0;
                                 
                                 if( (int(orIndex) != int(string::npos)) && (int(andIndex) != int(string::npos)) )
@@ -312,7 +322,7 @@ class Shell
                                 tmp = command1.substr(0,first);
                                 commandList1.push_back(CommandNode(tmp,connector));
                                 number++;
-                                cout << "check" << endl;
+                                //cout << "check" << endl;
                                 command1 = command1.substr(first+connector.length());
                                 orIndex = command1.find("||");
                                 andIndex = command1.find("&&");
@@ -325,7 +335,7 @@ class Shell
                             }
                             
                         }
-                        cout << "number " << number << endl;
+                        //cout << "number " << number << endl;
                         count.push_back(number);
                         
                     }
@@ -341,77 +351,18 @@ class Shell
 
 
 
-                    
-					for(unsigned int i = 0; i < commandParts.size(); i++)
-					{
-						cout << "commandParts " << commandParts[i] << endl;
-						//Parse now on || and &&
-						command = commandParts[i];
-						string tmp = "";
-						int orIndex = command.find("||");
-						int andIndex = command.find("&&");
-						string connector ="";
-
-						while( (int(orIndex) != int(string::npos)) or (int(andIndex) != int(string::npos)) )
-						{
-							cout << "command " << command << endl;
-							int first = 0;
-
-							if( (int(orIndex) != int(string::npos)) && (int(andIndex) != int(string::npos)) )
-							{
-								//first = (orIndex < andIndex) ? orIndex : andIndex;
-								if(orIndex < andIndex)
-								{
-									first = orIndex;
-									connector = "||";
-								}
-								else if(orIndex > andIndex)
-								{
-									first = andIndex;
-									connector = "&&";
-								}
-		            		}
-							else if( (int(orIndex) != int(string::npos)) && (int(andIndex) == int(string::npos)) )
-							{
-								first = orIndex;
-								connector = "||";
-							}
-							else if ( (int(orIndex) == int(string::npos)) && (int(andIndex) != int(string::npos)) )
-							{
-								first = andIndex;
-								connector = "&&";
-							}
-							
-							tmp = command.substr(0,first);
-							commandList.push_back(CommandNode(tmp,connector));
-							command = command.substr(first+connector.length());
-							orIndex = command.find("||");
-							andIndex = command.find("&&");
-						}
-
-						if(command.length() > 0)
-						{ commandList.push_back(CommandNode(command,";")); }
-					}
-//                    for(int i = 0; i < commandList.size(); ++i)
-//                    {
-//                        cout << "index " << i  << "content " << commandList.at(i) << endl;
-//                    }
-					cout << "commandSize" << commandList.size() << endl;
-					//Now for through each command in commandList and exectue them if possible
-					//https://en.wikipedia.org/wiki/Bash_(Unix_shell)
-
 					bool chainStatus = true;
 					Connector preCon;
 					bool currentReturnStatus = false;
 
-					for(unsigned int i = 0; i < commandList.size(); i++)
+					for(unsigned int i = 0; i < commandList1.size(); i++)
 					{
 						//Execute command node
-						CommandNode currentNode = commandList[i];
+						CommandNode currentNode = commandList1[i];
 						Connector con = currentNode.getConnector();
 						bool run = false;
 						string cmdstr = p.ltrim(currentNode.getCommand().getExec(), " ");
-
+                        //cout << "cmdstr " << cmdstr << endl;
 						//if input starts w/ connectors
 						if(cmdstr == "||")
 						{
@@ -460,14 +411,14 @@ class Shell
 							pair<bool,bool> ret;
 
 							//check if command is exit
-							string exitcmd = p.ltrimr(commandList[i].getCommand().getExec(), " ");
+							string exitcmd = p.ltrimr(commandList1[i].getCommand().getExec(), " ");
 							if(exitcmd == "exit")
 							{
 								finish();
 								return;
 							}
 
-							ret = execute(commandList[i]);
+							ret = execute(commandList1[i]);
 							currentReturnStatus = ret.first;
 							child = ret.second;
 
