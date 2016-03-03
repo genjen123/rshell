@@ -236,11 +236,13 @@ class Shell
                         cout << "values " << check.at(i) << endl;
                     }
                     vector< vector <string> > wonderful;
+                    
                     for(unsigned int i = 0; i < check.size(); i++)
                     {
                         if(check.at(i).size() > 1)
                         {
                             wonderful.push_back(p.split(check.at(i),";"));
+                            
                         }
                     }
 //                    
@@ -262,10 +264,12 @@ class Shell
                     //new adding
                     
                     string command1 = "";
-                    vector< vector <CommandNode> > commandList1(wonderful.size());
-                    
+                    vector<CommandNode> commandList1;
+                    vector<int>count;
+                    int number = 0;
                     for(unsigned int i = 0; i < wonderful.size(); i++)
                     {
+                        number = 0;
                         for(unsigned int j = 0; j < wonderful.at(i).size(); j++)
                         {
                             cout << "I am wonderful " << wonderful.at(i).at(j) << " size " << wonderful.at(i).at(j).size() <<  endl;
@@ -306,7 +310,8 @@ class Shell
                                 }
                                 
                                 tmp = command1.substr(0,first);
-                                commandList1.at(i).push_back(CommandNode(tmp,connector));
+                                commandList1.push_back(CommandNode(tmp,connector));
+                                number++;
                                 cout << "check" << endl;
                                 command1 = command1.substr(first+connector.length());
                                 orIndex = command1.find("||");
@@ -314,22 +319,27 @@ class Shell
                             }
                             
                             if(command1.length() > 0)
-                            { commandList1.at(i).push_back(CommandNode(command1,";")); }
+                            {
+                                number++;
+                                commandList1.push_back(CommandNode(command1,";"));
+                            }
                             
                         }
+                        cout << "number " << number << endl;
+                        count.push_back(number);
                         
                     }
                     cout << "commandSize" << commandList1.size() << endl;
                     for(int i = 0; i < commandList1.size(); ++i)
                     {
-                        cout << "i " << i << endl;
-                        for(int j = 0; j < commandList1.at(i).size(); ++j)
-                        {
-                            cout << "index " << j  << "content " << commandList.at(i).at(j) << endl;
-                            
-                        }
-                        
+                        cout << "index " << i  << "content " << commandList1.at(i) << endl;
                     }
+                    for(int i = 0; i < count.size(); ++i)
+                    {
+                        cout << "index " << i  << "content " << count.at(i) << endl;
+                    }
+
+
 
                     
 					for(unsigned int i = 0; i < commandParts.size(); i++)
@@ -382,10 +392,10 @@ class Shell
 						if(command.length() > 0)
 						{ commandList.push_back(CommandNode(command,";")); }
 					}
-                    for(int i = 0; i < commandList.size(); ++i)
-                    {
-                        cout << "index " << i  << "content " << commandList.at(i) << endl;
-                    }
+//                    for(int i = 0; i < commandList.size(); ++i)
+//                    {
+//                        cout << "index " << i  << "content " << commandList.at(i) << endl;
+//                    }
 					cout << "commandSize" << commandList.size() << endl;
 					//Now for through each command in commandList and exectue them if possible
 					//https://en.wikipedia.org/wiki/Bash_(Unix_shell)
