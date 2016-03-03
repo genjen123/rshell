@@ -230,11 +230,17 @@ class Shell
 					//Split inputs on # and ignore everything afterwards
 					string commands = p.split(input,"#")[0];
 										//Split on ';'
-                    vector<string> check = p.parenthesis(input);
-//                    for(int i = 0; i < check.size(); ++i)
-//                    {
-//                        cout << "values " << check.at(i) << endl;
-//                    }
+                    vector<int> wonderfulP;
+                    vector<int> newwonderful;
+                    vector<string> check = p.parenthesis(input,wonderfulP);
+                    for(int i = 0; i < check.size(); ++i)
+                    {
+                        cout << "values " << check.at(i) << endl;
+                    }
+                                        for(int i = 0; i < wonderfulP.size(); ++i)
+                                        {
+                                            cout << "values " << wonderfulP.at(i) << endl;
+                                        }
                     vector< vector <string> > wonderful;
                     
                     for(unsigned int i = 0; i < check.size(); i++)
@@ -242,6 +248,7 @@ class Shell
                         if(check.at(i).size() > 1)
                         {
                             wonderful.push_back(p.split(check.at(i),";"));
+                            newwonderful.push_back(wonderfulP.at(i));
                             
                         }
                     }
@@ -257,23 +264,25 @@ class Shell
                     
 
 					vector<string> commandParts = p.split(commands,";");
-					
+                    vector<int>commandCheck;
 					//Now go through command parts and create List of commandNode
-					string command = "";
-					//vector<CommandNode> commandList;
+                    //vector<CommandNode> commandList;
                     //new adding
                     
                     string command1 = "";
                     vector<CommandNode> commandList1;
                     vector<int>count;
-                    int number = 0;
+                    //int number = 0;
                     //int checkP = 0;
+                    int number = 0;
                     for(unsigned int i = 0; i < wonderful.size(); i++)
                     {
                         //number = 0;
-                        
+                        number++;
                         for(unsigned int j = 0; j < wonderful.at(i).size(); j++)
                         {
+                            
+                            
 //                            checkP = wonderful.at(i).at(j).find("p");
 //                            if(int(checkP) != int(string::npos))
 //                            {
@@ -287,11 +296,12 @@ class Shell
                             string tmp = "";
                             int orIndex = command1.find("||");
                             int andIndex = command1.find("&&");
+                           
                             string connector ="";
                             
                             while( (int(orIndex) != int(string::npos)) or (int(andIndex) != int(string::npos)) )
                             {
-                                //cout << "command " << command1 << endl;
+                                cout << "command " << command1 << endl;
                                 int first = 0;
                                 
                                 if( (int(orIndex) != int(string::npos)) && (int(andIndex) != int(string::npos)) )
@@ -321,28 +331,49 @@ class Shell
                                 
                                 tmp = command1.substr(0,first);
                                 commandList1.push_back(CommandNode(tmp,connector));
-                                number++;
+                                
+                                if(newwonderful.at(i) == 0)
+                                {
+                                    commandCheck.push_back(0);
+                                }
+                                else
+                                {
+                                    commandCheck.push_back(number);
+                                }
+                                //number++;
                                 //cout << "check" << endl;
                                 command1 = command1.substr(first+connector.length());
+                                
                                 orIndex = command1.find("||");
                                 andIndex = command1.find("&&");
                             }
                             
                             if(command1.length() > 0)
                             {
-                                number++;
+                                //number++;
                                 commandList1.push_back(CommandNode(command1,";"));
+                                if(newwonderful.at(i) == 0)
+                                {
+                                    commandCheck.push_back(0);
+                                }
+                                else
+                                {
+                                    commandCheck.push_back(number);
+                                }
                             }
                             
                         }
-                        //cout << "number " << number << endl;
-                        count.push_back(number);
+                       
                         
                     }
                     cout << "commandSize" << commandList1.size() << endl;
                     for(int i = 0; i < commandList1.size(); ++i)
                     {
                         cout << "index " << i  << "content " << commandList1.at(i) << endl;
+                    }
+                    for(int i = 0; i < commandCheck.size(); ++i)
+                    {
+                        cout << "index " << i  << "content wondeful " << commandCheck.at(i) << endl;
                     }
                     for(int i = 0; i < count.size(); ++i)
                     {
