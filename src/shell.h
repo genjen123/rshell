@@ -11,6 +11,7 @@
 #include <unistd.h> //execvp fork cd ..
 #include <sys/wait.h> //waitpid
 #include <errno.h>
+//#include <queue>
 //files included
 #include "parse.h"
 #include "commandnode.h"
@@ -379,11 +380,13 @@ class Shell
                     {
                         cout << "index " << i  << "content " << count.at(i) << endl;
                     }
-
+                    
 
 
 					bool chainStatus = true;
+                    bool parenthesisStatus = true;
 					Connector preCon;
+                    int paren = 0;
 					bool currentReturnStatus = false;
 
 					for(unsigned int i = 0; i < commandList1.size(); i++)
@@ -392,9 +395,40 @@ class Shell
 						CommandNode currentNode = commandList1[i];
 						Connector con = currentNode.getConnector();
 						bool run = false;
+                        paren = commandCheck.at(i);
 						string cmdstr = p.ltrim(currentNode.getCommand().getExec(), " ");
                         //cout << "cmdstr " << cmdstr << endl;
 						//if input starts w/ connectors
+                        if(paren == 0)
+                        {
+                            parenthesisStatus = true;
+                        }
+                        else
+                        {
+                            if(i == 0)
+                            {
+                                if(parenthesisStatus == commandCheck.at(1))
+                                {
+                                    parenthesisStatus = false;
+                                }
+
+                            }
+                            else if(i == (commandCheck.size() - 1))
+                            {
+                                if(parenthesisStatus == commandCheck.at(i - 1))
+                                {
+                                    parenthesisStatus = false;
+                                }
+                            }
+                            else if (parenthesisStatus == commandCheck.at(i - 1) || parenthesisStatus == commandCheck.at(i + 1) )
+                            {
+                                parenthesisStatus = false;
+                            }
+                            else
+                            {
+                                parenthesisStatus = true;
+                            }
+                        }
 						if(cmdstr == "||")
 						{
 							cerr << "rshell: syntax error near unexpected token \'||\'" << endl;
@@ -464,7 +498,10 @@ class Shell
 
 						//assign new status
 						//chainStatus = currentReturnStatus && chainStatus;
-						preCon = con;
+                        if(parenthesisStatus)
+                        {
+                            preCon = con;
+                        }
 
 						if(child)
 						{ break; }
