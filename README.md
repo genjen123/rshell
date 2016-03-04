@@ -24,11 +24,68 @@
 			
 	$ ls -a; echo hello && mkdir test || echo world; git status
 
+####Additional commands/functionality:
+
+**Test:**
+
+> Used to check if a file/directory exists (for this program)
+> This command is useful for writing conditions that can be combined with
+> && or || to write more complex bash command structures.
+
+**Tests will take the form:**
+
+	$ test -e /test/file/path
+
+######OR
+	
+	$ [ -e /test/file/path ]
+
+> Currently, it will also work on the following flags:
+
+	-e : checks if the file/directory exists
+	-f : checks if the file/directory exists and is a regular file
+	-d : checks if the file/directory exists and is a directory
+
+> If a flag is not specified then -e will be used by default. 
+
+######Output
+	
+> Test will output a boolean status to the terminal as it is evaluated.
+
+**Example:**
+
+	test -e /test/file/path evaluates to True
+
+######output: (True)
+
+	test -e /test/file/path evaluates to False
+
+######output: (False)
+
+**Precedence Operators:**
+
+> Takes the form of **( )** and are used to change the precedence of the returns of commands, connectors, and chains of connectors. 
+
+**Example:**
+
+	$ echo A && echo B || echo C && echo D
+
+######output: A B D
+
+	$ (echo A && echo B) || (echo C && echo D)
+
+######output: A B
+
 **Basic Program Execution:**
 
 - Execution of the command(s) will use the syscalls *fork*, *execvp*, and *waitpid*.
 - A special built-in command of *exit* will exit the rshell. 
-- Anything after a *#* will be ignored. 
+- Anything after a *#* will be ignored.
+- The *;* is used to break up commands.
+- Anything within the *()* will execute first.
+- For now, *test* only has 3 flags so any flag other than -e, -f, or -d will produce an error.  
+- Execution of **test** uses the *stat()* function as well as the *S_ISDIR* and *S_ISREG* macros in order to implement the flags for the program.
+- The code will output nothing if nothing is entered. 
 
 # Known bugs:
 
@@ -43,8 +100,9 @@ Bug | Description
 --------------- | ---------------
 Space readings | A space before a command will produce an error
 Echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted (vary on systems)
-Exit | Exit will work if it is a single command that is not chained together
 ls | ls will work as a command however, ls -a may or may not work
+cd | Works if the command is repeated for a second time but error message stil shows.
+[] | Works best if there is a space between the arguments and brackets. One test case for the issue is not fixed yet.
 
 **Notes:** 
 
