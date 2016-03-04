@@ -47,20 +47,29 @@ class Test : public CommandNode
 			string arg = " ";
 			bool stat;
 			string exeTrim = p.ltrim(exe, "[");
-			string cnTrin = p.ltrim(cn, "]");
-			vector<string> tmp = p.split(cn, " ");		//split flag and directory
+			string cnTrim = p.rtrim(cn, "]");
 
-			if(cn.empty())
+			vector<string> tmp = p.split(cnTrim, " ");		//split flag and directory
+			cout << "exe: " << exeTrim << " cn: " << cnTrim << endl;
+
+			if(exe == "test" && cnTrim.empty())
 			{ return -2; } 			//if test doesn't have any arguments
-			
+			cout << "tmp size: " << tmp.size() << endl;
 			if(tmp.size() > 1)
 			{
 				curr_flag = tmp.at(0);
 				arg = tmp.at(1);
 			}
+			else if(!exe.empty())
+			{
+				curr_flag = exeTrim;
+				cout << "a" << endl;
+				arg = tmp.at(0);
+			}
 			else
 			{ 
 				curr_flag = "-e";
+				cout << "b" << endl;
 				arg = tmp.at(0); 
 			}
 
@@ -93,10 +102,10 @@ class Test : public CommandNode
 
 
 
-				return 0;
+				return 0;				//return success 
 			}
 			else	
-			{ return -1; }
+			{ return -1; }				//-1 for failed or error
 		}
 };
 
