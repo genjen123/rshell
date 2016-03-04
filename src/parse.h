@@ -108,11 +108,13 @@ class Parse
 			return newString;
 		}
 
-		/*string rtrim(string input, const string &pattern)
+		string rtrim(string input, const string &pattern)
 		{
 			string newString = "";
-			return newString;
-		}*/
+			int found = input.rfind(pattern);
+
+			return (found != (input.length() - pattern.length())) ? input : input.substr(0, found);
+		}
 };
 
 #endif
