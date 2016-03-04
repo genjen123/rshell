@@ -41,7 +41,7 @@ class Shell
 			bool child = false;
 			string exe = cn.getCommand().getExec();
 
-			//cout << "exe: " << exe << endl; 
+			cout << "exe: " << exe << endl; 
 			//cout << cn << endl;
 
 			//Check to see if command is cd
@@ -76,9 +76,24 @@ class Shell
 					return make_pair(true,child);
 				}
 			}
-			else if(exe == "test")					//check to see if cmd is test
+			else if(exe == "test")					//check to see if command is test
 			{
-				//runTest();
+				Test tStat;							//make test object
+				int condition = tStat.runTest(cn.getCommand().getArgListStr());		//pass argument of command to test class		
+				string f = tStat.getFlag();
+
+				cout << "status: " << condition << endl;
+				/*if(condition == -1)
+				{
+					cout << "rshell: " << exe << ": " + f << ": "<< strerror(errno) << endl;
+					child false;
+					return make_pair(false, child);
+				}
+				else 
+				{
+					return = false;
+					return make_pair(true, child);
+				}*/
 			}
 			else
 			{
@@ -289,11 +304,11 @@ class Shell
 					//cout << commandList.size() << endl;
 					//Now for through each command in commandList and exectue them if possible
 					//https://en.wikipedia.org/wiki/Bash_(Unix_shell)
-
 					bool chainStatus = true;
 					Connector preCon;
 					bool currentReturnStatus = false;
 
+					//runs every command in command list in proper order
 					for(unsigned int i = 0; i < commandList.size(); i++)
 					{
 						//Execute command node
@@ -310,7 +325,7 @@ class Shell
 						}
 						else if(cmdstr == "&&")
 						{
-							cerr << "rshell: syntax error near unexpected token \'||\'" << endl;
+							cerr << "rshell: syntax error near unexpected token \'&&\'" << endl;
 							break;
 						}
 
@@ -357,7 +372,8 @@ class Shell
 								return;
 							}
 
-							ret = execute(commandList[i]);
+							//cout << "current cmd: " << commandList[i] << endl;
+							ret = execute(commandList[i]);			//execvp() on commands
 							currentReturnStatus = ret.first;
 							child = ret.second;
 
