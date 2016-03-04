@@ -40,17 +40,18 @@ class Test : public CommandNode
 		}
 
 		//run test command
-		int runTest(const string &cn)
+		int runTest(const string &exe, const string &cn)
 		{
-			cout << "current: " << cn << endl;
-			if(cn.empty())
-			{ return -2; } 			//if test doesn't have any arguments
-
 			//set variables and values
 			Parse p;
 			string arg = " ";
 			bool stat;
+			string exeTrim = p.ltrim(exe, "[");
+			string cnTrin = p.ltrim(cn, "]");
 			vector<string> tmp = p.split(cn, " ");		//split flag and directory
+
+			if(cn.empty())
+			{ return -2; } 			//if test doesn't have any arguments
 			
 			if(tmp.size() > 1)
 			{
@@ -64,12 +65,31 @@ class Test : public CommandNode
 			}
 
 			cout << "flag: " << curr_flag << endl << "arg: " << arg << endl;
+			if(curr_flag == arg)		//if no file directory then return
+			{ return 0; }		
+			
 			stat = fExits(curr_flag);		//check if flag is correct
 
 			//start logic of test (0 is success & -1 is error)
 			if(stat)
 			{
-				struct stat sb;				//stat variable for stat() command
+				//struct stat sb;				//stat variable for stat() command
+				//struct dirent *ent;			//for directory stream
+				//DIR *dir; 
+
+				//checking w/ flags
+				if(curr_flag == "-e")		//check if file/directory exists
+				{
+
+				}
+				else if(curr_flag == "-f")	//check if file/directory is regular file
+				{
+					//implement S_ISREG
+				}
+				else if(curr_flag == "-d")	//check if file/directory is a directory
+				{
+					//implement S_ISDIR
+				}
 
 
 
