@@ -49,9 +49,9 @@ class Shell
 				{ end = ']'; }
 			}
 
-			cout << "exe: " << exe << endl; 
+			//cout << "exe: " << exe << endl; 
 			//cout << cn << endl;
-			cout << "end: " << end << endl;
+			//cout << "end: " << end << endl;
 
 			//Check to see if command is cd
 			if(exe == "cd")
