@@ -43,6 +43,12 @@ class Shell
 			char beg = exe.at(0);					//get front [
 			char end = cn.getCommand().getArgListStr().back();		//get back ]
 
+			if(exe.length() > 1)			//if exe has [] w/out space
+			{ 
+				if(exe.at(1) == ']' || exe.back() == ']')
+				{ end = ']'; }
+			}
+
 			cout << "exe: " << exe << endl; 
 			//cout << cn << endl;
 			cout << "end: " << end << endl;
@@ -81,7 +87,7 @@ class Shell
 			}
 			else if(exe == "test" || beg == '[')					//check to see if command is test
 			{
-				if(end != ']' || end == '\0')			//if end bracket not found
+				if((end != ']' || end == '\0') && exe != "test")	//if end bracket not found
 				{
 					cerr << "rshell: [: unknown operand" << endl; 
 					child = false;
