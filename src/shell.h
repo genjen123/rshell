@@ -40,9 +40,12 @@ class Shell
 			bool returnStatus = false;
 			bool child = false;
 			string exe = cn.getCommand().getExec();
+			char beg = exe.at(0);					//get front [
+			char end = cn.getCommand().getArgListStr().back();		//get back ]
 
 			cout << "exe: " << exe << endl; 
 			//cout << cn << endl;
+			cout << "end: " << end << endl;
 
 			//Check to see if command is cd
 			if(exe == "cd")
@@ -76,10 +79,17 @@ class Shell
 					return make_pair(true,child);
 				}
 			}
-			else if(exe == "test")					//check to see if command is test
+			else if(exe == "test" || beg == '[')					//check to see if command is test
 			{
+				if(end != ']' || end == '\0')			//if end bracket not found
+				{
+					cerr << "rshell: [: unknown operand" << endl; 
+					child = false;
+					return make_pair(false, child); 
+				}
+
 				Test tStat;							//make test object
-				int condition = tStat.runTest(cn.getCommand().getArgListStr());		//pass argument of command to test class		
+				int condition = tStat.runTest(exe, cn.getCommand().getArgListStr());		//pass argument of command to test class		
 				string f = tStat.getFlag();
 
 				cout << "status: " << condition << endl;
