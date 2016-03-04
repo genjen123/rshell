@@ -58,8 +58,6 @@ class Parse
 			}
 			*/
 		}
-
-		string ParseCmd(string input);
 		
 		vector<string> split(string input, const string &pattern)
 		{
@@ -75,7 +73,7 @@ class Parse
 				input = input.substr(found+pattern.length());	//edit input string
 				found = input.find(pattern);		//find other pattern repeats
 			}
-			
+
 			if(input.length() > 0)		//if input !empty
 			{ values.push_back(input); }
 			
@@ -110,11 +108,11 @@ class Parse
 			return newString;
 		}
 
-		string rtrim(string input, const string &pattern)
+		/*string rtrim(string input, const string &pattern)
 		{
 			string newString = "";
 			return newString;
-		}
+		}*/
 };
 
 #endif
