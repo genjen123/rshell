@@ -74,6 +74,31 @@ class Parse
 
 			return count;
 		}
+
+		vector<string> parenSplit(string input)
+		{
+			vector<string> values;
+			string part = " ";
+			int foundOpen = input.find("(");
+			//int foundClose = input.find(")");
+
+			while(!input.empty())
+			{
+				if(input.at(0) == '(')			//if at first position of '('
+				{
+
+				}
+				else
+				{
+					part = input.substr(0, foundOpen);		//cut from 0 -> '('
+					values.push_back(part);					//add to vector
+					input = input.substr(foundOpen + 1);
+					foundOpen = input.find("(");
+				}
+			}
+
+			return values;
+		}
 		
 		vector<string> split(string input, const string &pattern)
 		{
