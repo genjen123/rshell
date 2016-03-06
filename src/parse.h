@@ -58,6 +58,22 @@ class Parse
 			}
 			*/
 		}
+
+		int findParen(string input, const string &pattern)
+		{
+			string tmp = " ";
+			int count = 0;
+			int found = input.find(pattern);		//find position of '(' or ')'
+
+			while(int(found) != int(string::npos))	//if found
+			{
+				count++;							//increment count
+				input = input.substr(found + pattern.length());	//edit string
+				found = input.find(pattern);		//find other repeats
+			}
+
+			return count;
+		}
 		
 		vector<string> split(string input, const string &pattern)
 		{
@@ -70,7 +86,7 @@ class Parse
 			{
 				part = input.substr(0,found);		//cut string to pattern
 				values.push_back(part);				//add string to vector
-				input = input.substr(found+pattern.length());	//edit input string
+				input = input.substr(found + pattern.length());	//edit input string
 				found = input.find(pattern);		//find other pattern repeats
 			}
 
