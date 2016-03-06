@@ -43,7 +43,7 @@ class Test : public CommandNode
 		int runTest(const string &exe, const string &cn)
 		{
 			if(exe == "[]")
-			{ return -1; }		//quit immediately
+			{ return 1; }		//quit immediately
 
 			//set variables and values
 			Parse p;
@@ -68,7 +68,7 @@ class Test : public CommandNode
 			if(cnTrim.back() != ' ')
 			{
 				if((exe == "test" || exeTrim == "]" || exeTrim.empty()) && cnTrim.empty()) 
-				{ return -1; } 			//if test doesn't have any arguments or flag 
+				{ return 1; } 			//if test doesn't have any arguments or flag 
 				else if(tmp.size() <= 1 && cn.at(0) == '-')
 				{ return 0; }			//if test has no arguments but has flag
 			}
@@ -93,7 +93,7 @@ class Test : public CommandNode
 			
 			stat = fExits(curr_flag);		//check if flag is correct
 
-			//start logic of test (0 is success & -1 is error)
+			//start logic of test (0 is success & 1 is error)
 			if(stat)
 			{
 				//struct stat sb;				//stat variable for stat() command
@@ -119,7 +119,7 @@ class Test : public CommandNode
 				return 0;				//return success 
 			}
 			else	
-			{ return 1; }				//-1 for failed or error
+			{ return -1; }				//-1 for nonexisting flag
 		}
 };
 
