@@ -42,35 +42,49 @@ class Test : public CommandNode
 		//run test command
 		int runTest(const string &exe, const string &cn)
 		{
+			if(exe == "[]")
+			{ return -1; }		//quit immediately
+
 			//set variables and values
 			Parse p;
 			string arg = " ";
 			bool stat;
 			string exeTrim = p.ltrim(exe, "[");
-			string cnTrim = p.rtrim(cn, "]");
+			string add, cnTrim;
+
+			if(exe != "test")				//if [] then add to cn and parse ]
+			{ 
+				add = exeTrim + " " + cn; 
+				cnTrim = p.rtrim(add, "]");
+				cnTrim = p.ltrim(cnTrim, " ");
+			}
+			else
+			{ cnTrim = p.rtrim(cn, "]"); }
 
 			vector<string> tmp = p.split(cnTrim, " ");		//split flag and directory
 			cout << "exe: " << exeTrim << " cn: " << cnTrim << endl;
-
-			if(exe == "test" && cnTrim.empty())
-			{ return -2; } 			//if test doesn't have any arguments
 			cout << "tmp size: " << tmp.size() << endl;
-			if(tmp.size() > 1)
+
+			if(cnTrim.back() != ' ')
+			{
+				if((exe == "test" || exeTrim == "]" || exeTrim.empty()) && cnTrim.empty()) 
+				{ return -1; } 			//if test doesn't have any arguments or flag 
+				else if(tmp.size() <= 1 && cn.at(0) == '-')
+				{ return 0; }			//if test has no arguments but has flag
+			}
+
+			if(tmp.size() > 1)			//if flag and argument
 			{
 				curr_flag = tmp.at(0);
 				arg = tmp.at(1);
 			}
-			else if(!exe.empty())
-			{
-				curr_flag = exeTrim;
-				cout << "a" << endl;
-				arg = tmp.at(0);
-			}
-			else
+			else if(tmp.size() == 1 && cnTrim.at(0) == '-')		//if flag only
+			{ return 0; }
+			else						//if argument only
 			{ 
 				curr_flag = "-e";
-				cout << "b" << endl;
 				arg = tmp.at(0); 
+				arg = p.rtrim(arg, "]");
 			}
 
 			cout << "flag: " << curr_flag << endl << "arg: " << arg << endl;
@@ -105,7 +119,7 @@ class Test : public CommandNode
 				return 0;				//return success 
 			}
 			else	
-			{ return -1; }				//-1 for failed or error
+			{ return 1; }				//-1 for failed or error
 		}
 };
 
