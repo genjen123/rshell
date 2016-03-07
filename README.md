@@ -31,9 +31,10 @@
 > Used to check if a file/directory exists (for this program).
 > This command is useful for writing conditions that can be combined with
 > && or || to write more complex bash command structures.
-> Test can be executed in three ways, although the first 2 is preferred.
+> Test can be executed in three ways, although the first 2 is preferred since
+> the 3rd is an added functionality.
 
-	$ test -e /test/file/path
+	$ test -e /test/file/path      OR      $ Test -e /test/file/path
 
 ######OR
 	
@@ -43,13 +44,14 @@
 	
 	$ [-e /test/file/path]
 
-> Currently, it will also work on the following flags:
+> Currently, it will only work for the following flags:
 
 	-e : checks if the file/directory exists
 	-f : checks if the file/directory exists and is a regular file
 	-d : checks if the file/directory exists and is a directory
 
 > If a flag is not specified then -e will be used by default. 
+> If there is no file/directory with a flag then test will automatically be true.
 
 **Output**
 	
