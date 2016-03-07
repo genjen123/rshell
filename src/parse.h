@@ -156,6 +156,16 @@ class Parse
 
 			return (found != (input.length() - pattern.length())) ? input : input.substr(0, found);
 		}
+
+		char back(string input)
+		{
+			char b = '\0';
+
+			if(input.size() > 0)
+			{ b = char(input.at(input.size() - 1)); }
+
+			return b;
+		}
 };
 
 #endif
