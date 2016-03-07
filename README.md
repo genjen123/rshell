@@ -31,14 +31,17 @@
 > Used to check if a file/directory exists (for this program).
 > This command is useful for writing conditions that can be combined with
 > && or || to write more complex bash command structures.
-
-**Tests will take the form:**
+> Test can be executed in three ways, although the first 2 is preferred.
 
 	$ test -e /test/file/path
 
 ######OR
 	
 	$ [ -e /test/file/path ]
+
+######OR
+	
+	$ [-e /test/file/path]
 
 > Currently, it will also work on the following flags:
 
@@ -87,7 +90,7 @@
 - Execution of **test** uses the *stat( )* function as well as the *S_ISDIR* and *S_ISREG* macros in order to implement the flags for the program.
 - The code will output nothing if nothing is entered. 
 
-**Running the program:**
+#Running the program:
 	
 	$ git clone https://github.com/genjen123/rshell.git
 	$ cd rshell
