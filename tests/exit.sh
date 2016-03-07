@@ -2,7 +2,7 @@
 
 #tests exit and commands with exit
 make all
-echo -e "cd .. || exit\nexit\n" | bin/
+echo -e "cd .. || exit\nexit\n" | bin/rshell
 echo 
 echo -e "echo A#exit\nexit\n" | bin/rshell
 echo
