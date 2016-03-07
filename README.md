@@ -38,11 +38,7 @@
 
 ######OR
 	
-	$ [ -e /test/file/path ]
-
-######OR
-	
-	$ [-e /test/file/path]
+	$ [ -e /test/file/path ]      OR      $ [-e /test/file/path]
 
 > Currently, it will only work for the following flags:
 
@@ -114,7 +110,7 @@ Bug | Description
 Space readings | A space before a command will produce an error
 Echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted (vary on systems)
 ls | ls will work as a command however, ls -a may or may not work (vary on systems)
-cd | Works if the command is repeated for a second time but error message stil shows.
+cd | Works if the command is repeated for a second time but error message still shows.
 [ ] | Works best if there is a space between the arguments and brackets.
 
 **Notes:** 
@@ -122,4 +118,4 @@ cd | Works if the command is repeated for a second time but error message stil s
 - Any program that's bash specific may not work for the shell. However, standard cd commands can.
 - Some recorded bugs (like ls and echo) are only bugs found when running on our personal work environment. So if the program is normally run on hammer then they are perfectly functional.
 - Any commands taken in input from ~ will not be run properly. If it needs to be implemented then it could be substituted for the user's homepath. 
-- Unlike an actual terminal, if the number of "(" is not equal to the number of ")", the rshell will output an error message.
+- Unlike an actual terminal, if there is no ')' for every '(', then the rshell will output an error message.
