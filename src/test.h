@@ -24,7 +24,7 @@ class Test : public CommandNode
 
 	public:
 		//default constructor
-		Test(){};
+		Test(): curr_flag(""){};
 
 		//get flag for error purposes
 		string getFlag()
@@ -33,7 +33,7 @@ class Test : public CommandNode
 		//return true if proper flag exists
 		bool fExits(const string flag)
 		{
-			if(flag == "-e" || flag == "-f" || flag == "-d")
+   			if(flag == "-e" || flag == "-f" || flag == "-d")
 			{ return true; }
 
 			return false;
@@ -48,7 +48,7 @@ class Test : public CommandNode
 			//set variables and values
 			Parse p;
 			string arg = " ";
-			bool stat;
+			bool status;
 			string exeTrim = p.ltrim(exe, "[");
 			string add, cnTrim;
 
@@ -62,10 +62,10 @@ class Test : public CommandNode
 			{ cnTrim = p.rtrim(cn, "]"); }
 
 			vector<string> tmp = p.split(cnTrim, " ");		//split flag and directory
-			cout << "exe: " << exeTrim << " cn: " << cnTrim << endl;
-			cout << "tmp size: " << tmp.size() << endl;
+			//cout << "exe: " << exeTrim << " cn: " << cnTrim << endl;
+			//cout << "tmp size: " << tmp.size() << endl;
 
-			if(cnTrim.back() != ' ')
+			if(cnTrim.at(cnTrim.size() - 1) != ' ')
 			{
 				if((exe == "test" || exeTrim == "]" || exeTrim.empty()) && cnTrim.empty()) 
 				{ return 1; } 			//if test doesn't have any arguments or flag 
@@ -87,35 +87,71 @@ class Test : public CommandNode
 				arg = p.rtrim(arg, "]");
 			}
 
-			cout << "flag: " << curr_flag << endl << "arg: " << arg << endl;
+			//cout << "flag: " << curr_flag << endl << "arg: " << arg << endl;
 			if(curr_flag == arg)		//if no file directory then return
 			{ return 0; }		
 			
-			stat = fExits(curr_flag);		//check if flag is correct
+			status = fExits(curr_flag);		//check if flag is correct
 
 			//start logic of test (0 is success & 1 is error)
-			if(stat)
+			if(status)
 			{
-				//struct stat sb;				//stat variable for stat() command
-				//struct dirent *ent;			//for directory stream
-				//DIR *dir; 
+				struct stat info;			//stat() object
+				bool exists = false;
+
+				if(stat(arg.c_str(), &info) != 0)	//if arg not found
+				{ exists = false; }
+				else
+				{ exists = true; }
+
+				/*cout << arg << " exists = ";
+				if(exists)
+				{ cout << "true" << endl; }
+				else
+				{ cout << "false" << endl; }*/
 
 				//checking w/ flags
 				if(curr_flag == "-e")		//check if file/directory exists
 				{
-
+					if(exists)
+					{
+						cout << "(True)" << endl;
+						return 0;
+					}
+					else
+					{
+						cout << "(False)" << endl;
+						return 1;
+					}
 				}
 				else if(curr_flag == "-f")	//check if file/directory is regular file
 				{
 					//implement S_ISREG
+					if(S_ISREG(info.st_mode) && exists)
+					{
+						cout << "(True)" << endl;
+						return 0;
+					}
+					else
+					{
+						cout << "(False)" << endl;
+						return 1;
+					}
 				}
 				else if(curr_flag == "-d")	//check if file/directory is a directory
 				{
 					//implement S_ISDIR
+					if(S_ISDIR(info.st_mode) && exists)
+					{
+						cout << "(True)" << endl;
+						return 0;
+					}
+					else
+					{
+						cout << "(False)" << endl;
+						return 1;
+					}
 				}
-
-
-
 				return 0;				//return success 
 			}
 			else	

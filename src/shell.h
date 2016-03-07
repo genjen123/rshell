@@ -85,7 +85,7 @@ class Shell
 					return make_pair(true,child);
 				}
 			}
-			else if(exe == "test" || beg == '[')					//check to see if command is test
+			else if(exe == "test" || beg == '[')	//check to see if command is test
 			{
 				if((end != ']' || end == '\0') && exe != "test")	//if end bracket not found
 				{
@@ -105,13 +105,18 @@ class Shell
 					child false;
 					return make_pair(false, child);
 				}
+				else if(condition == 1)
+				{
+					cout << "(False)";
+				}
 				else 
 				{
+					cout << "(True)" << endl;
 					return = false;
 					return make_pair(true, child);
 				}*/
 			}
-			else
+			else			//for shell commands
 			{
 				pid_t pid = fork();
 
@@ -251,7 +256,7 @@ class Shell
 				input = p.ltrimr(input," ");
 				input = p.ltrimr(input, "\t");
 
-				if(input == "")			//continue regardless
+				if(input == "")			//if empty then continue regardless
 				{ continue; }
 				//cout << input << endl;
 				
@@ -260,6 +265,18 @@ class Shell
 					//Split inputs on # and ignore everything afterwards
 					string commands = p.split(input,"#")[0];
 					
+					int open = p.findParen(commands, "(");		//find # of '('
+					int close = p.findParen(commands, ")");		//find # of ')'
+
+					if(open != close)			//if # of '(' != ')' then exit
+					{
+						cout << "rshell: syntax error near unexpected token \')\'" << endl;
+						break;
+					}
+
+					//split on parentheses
+					//vector<string> parenParts = p.parenSplit(commands);
+
 					//Split on ';'
 					vector<string> commandParts = p.split(commands,";");
 					
