@@ -79,6 +79,8 @@
 
 ######output: A B
 
+> Note: This version of rshell does not support nested *( )* 
+
 **Basic Program Execution:**
 
 - Execution of the command(s) will use the syscalls *fork*, *execvp*, and *waitpid*.
