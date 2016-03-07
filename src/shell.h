@@ -41,13 +41,19 @@ class Shell
 			bool child = false;
 			string exe = cn.getCommand().getExec();
 			char beg = exe.at(0);					//get front [
-			char end = cn.getCommand().getArgListStr().back();		//get back ]
+			char end = '\0';
+
+			if(cn.getCommand().getArgListStr().size() > 0)
+			{ end = cn.getCommand().getArgListStr().at(cn.getCommand().getArgListStr().size() - 1); }
 
 			if(exe.length() > 1)			//if exe has [] w/out space
 			{ 
 				if(exe.at(1) == ']' || exe.back() == ']')
 				{ end = ']'; }
 			}
+
+			if(exe == "Test")			//for upper case test cases
+			{ exe = "test"; }
 
 			//cout << "exe: " << exe << endl; 
 			//cout << cn << endl;
@@ -89,7 +95,7 @@ class Shell
 			{
 				if((end != ']' || end == '\0') && exe != "test")	//if end bracket not found
 				{
-					cerr << "rshell: [: unknown operand" << endl; 
+					cerr << "rshell: [: missing `]'" << endl; 
 					child = false;
 					return make_pair(false, child); 
 				}
@@ -98,23 +104,25 @@ class Shell
 				int condition = tStat.runTest(exe, cn.getCommand().getArgListStr());		//pass argument of command to test class		
 				string f = tStat.getFlag();
 
-				cout << "status: " << condition << endl;
-				/*if(condition == -1)
+				//cout << "status: " << condition << endl;
+				if(condition == -1)
 				{
 					cout << "rshell: " << exe << ": " + f << ": "<< strerror(errno) << endl;
-					child false;
+					child = false;
 					return make_pair(false, child);
 				}
 				else if(condition == 1)
 				{
-					cout << "(False)";
+					cout << "(False)" << endl;
+					//child = false;
+					//return make_pair(false, child);
 				}
 				else 
 				{
 					cout << "(True)" << endl;
-					return = false;
-					return make_pair(true, child);
-				}*/
+					//child = true;
+					//return make_pair(true, child);
+				}
 			}
 			else			//for shell commands
 			{
