@@ -64,6 +64,7 @@ class Shell
 			{
 				//cout << "cd might happend:" << endl;
 				int argSize = cn.getCommand().getArgList().size();
+				errno = 0;
 				
 				if(argSize > 0)
 				{
@@ -79,7 +80,7 @@ class Shell
 					chdir(getenv("HOME"));
 					//cout << "error:" << errno << endl;
 				}
-				if(errno)
+				if(errno != 0)
 				{
 					cout << "rshell: " << exe << ": " +  cn.getCommand().getArgListStr() << ": " << strerror(errno) << endl;
 					child = false;
@@ -114,14 +115,14 @@ class Shell
 				else if(condition == 1)
 				{
 					cout << "(False)" << endl;
-					//child = false;
-					//return make_pair(false, child);
+					child = false;
+					return make_pair(false, child);
 				}
 				else 
 				{
 					cout << "(True)" << endl;
-					//child = true;
-					//return make_pair(true, child);
+					child = false;
+					return make_pair(true, child);
 				}
 			}
 			else			//for shell commands
