@@ -42,8 +42,8 @@ class Test : public CommandNode
 		//run test command
 		int runTest(const string &exe, const string &cn)
 		{
-			if(exe == "[]")
-			{ return 1; }		//quit immediately
+			if(exe == "[]")	//quit immediately
+			{ return -1; }		
 
 			//set variables and values
 			Parse p;
@@ -65,7 +65,7 @@ class Test : public CommandNode
 			//cout << "exe: " << exeTrim << " cn: " << cnTrim << endl;
 			//cout << "tmp size: " << tmp.size() << endl;
 
-			if(cnTrim.at(cnTrim.size() - 1) != ' ')
+			if(p.back(cnTrim) != ' ')
 			{
 				if((exe == "test" || exeTrim == "]" || exeTrim.empty()) && cnTrim.empty()) 
 				{ return 1; } 			//if test doesn't have any arguments or flag 
@@ -114,43 +114,25 @@ class Test : public CommandNode
 				if(curr_flag == "-e")		//check if file/directory exists
 				{
 					if(exists)
-					{
-						cout << "(True)" << endl;
-						return 0;
-					}
+					{ return 0; }
 					else
-					{
-						cout << "(False)" << endl;
-						return 1;
-					}
+					{ return 1; }
 				}
 				else if(curr_flag == "-f")	//check if file/directory is regular file
 				{
 					//implement S_ISREG
 					if(S_ISREG(info.st_mode) && exists)
-					{
-						cout << "(True)" << endl;
-						return 0;
-					}
+					{ return 0; }
 					else
-					{
-						cout << "(False)" << endl;
-						return 1;
-					}
+					{ return 1; }
 				}
 				else if(curr_flag == "-d")	//check if file/directory is a directory
 				{
 					//implement S_ISDIR
 					if(S_ISDIR(info.st_mode) && exists)
-					{
-						cout << "(True)" << endl;
-						return 0;
-					}
+					{ return 0; }
 					else
-					{
-						cout << "(False)" << endl;
-						return 1;
-					}
+					{ return 1; }
 				}
 				return 0;				//return success 
 			}
