@@ -28,11 +28,13 @@
 
 **Test:**
 
-> Used to check if a file/directory exists (for this program).
-> This command is useful for writing conditions that can be combined with
-> && or || to write more complex bash command structures.
-> Test can be executed in three ways, although the first 2 is preferred since
-> the 3rd is an added functionality.
+> Used to check if a file/directory exists from the current folder.
+> To check if other files/directories exists, it is best to use the cd 
+> command to navigate to the parent folder before testing for the desired
+> file/directory. The *test* command is useful for writing conditions 
+> that can be combined with && or || to write more complex bash command structures.
+> Test can be executed with 2 methods, however the first of each is the preferred
+> method.
 
 	$ test -e /test/file/path      OR      $ Test -e /test/file/path
 
@@ -107,10 +109,9 @@
 
 Bug | Description
 --------------- | ---------------
-Space readings | A space before a command will produce an error
-Echo output | Needs at least 2 spaces between echo and the string in order for the whole message to be outputted (vary on systems)
+Echo output | Needs at least 2 spaces between echo and the string in order for the first character to be outputted (vary on systems)
 ls | ls will work as a command however, ls -a may or may not work (vary on systems)
-cd | Works if the command is repeated for a second time but error message still shows.
+cd | Doing cd .. will produce an error the first time but will work everytime after it.
 [ ] | Works best if there is a space between the arguments and brackets.
 
 **Notes:** 
