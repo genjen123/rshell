@@ -24,7 +24,7 @@
 			
 	$ ls -a; echo hello && mkdir test || echo world; git status
 
-####Additional commands/functionality:
+#### Additional commands/functionality:
 
 **Test:**
 
@@ -38,7 +38,7 @@
 
 	$ test -e /test/file/path      OR      $ Test -e /test/file/path
 
-######OR
+###### OR
 	
 	$ [ -e /test/file/path ]      OR      $ [-e /test/file/path]
 
@@ -59,11 +59,11 @@
 
 	test -e /test/file/path evaluates to True
 
-######output: (True)
+###### output: (True)
 
 	test -e /test/file/path evaluates to False
 
-######output: (False)
+###### output: (False)
 
 **Precedence Operators:**
 
@@ -73,11 +73,11 @@
 
 	$ echo A && echo B || echo C && echo D
 
-######output: A B D
+###### output: A B D
 
 	$ (echo A && echo B) || (echo C && echo D)
 
-######output: A B
+###### output: A B
 
 > Note: This version of rshell does not support nested *( )* 
 
@@ -92,7 +92,7 @@
 - Execution of **test** uses the *stat( )* function as well as the *S_ISDIR* and *S_ISREG* macros in order to implement the flags for the program.
 - The code will output nothing if nothing is entered. 
 
-#Running the program:
+# Running the program:
 	
 	$ git clone https://github.com/genjen123/rshell.git
 	$ cd rshell
@@ -120,5 +120,5 @@ cd | Doing cd .. will produce an error the first time but will work everytime af
 
 - Any program that's bash specific may not work for the shell. However, standard cd commands can.
 - Some recorded bugs (like ls and echo) are only bugs found when running on our personal work environment. So if the program is normally run on hammer then they are perfectly functional.
-- Any commands taken in input from ~ will not be run properly. If it needs to be implemented then it could be substituted for the user's homepath. 
+- Any commands taken in input from ~ will not run properly. If it needs to be implemented then it could be substituted for the user's homepath. 
 - Unlike an actual terminal, if there is no ')' for every '(', then the rshell will output an error message.
